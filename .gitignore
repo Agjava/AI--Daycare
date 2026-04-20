@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Agent
+.agent/
+.gemini/
+
+# Dev scripts (contain local data)
+scripts/seed_dev.py
+
+# Frontend
+node_modules/
+frontend/console/dist/
+
+# Dev docs (deep dives, competitive research — local only)
+# Moved to .private/
+
+# Private / local files
+.private/
+
+# Design files (local only — referenced via Stitch)
+DESIGN.md
+CLAUDE.md
+GEMINI.md
+

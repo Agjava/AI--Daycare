@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #fef8f5;
+    color: #1d1b1a;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Noto Serif', serif;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+}
+
+@layer components {
+  /* Glassmorphism for floating elements */
+  .glass-panel {
+    background: rgba(254, 248, 245, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Japandi card — no border, tonal lift */
+  .japandi-card {
+    background-color: #ffffff;
+    transition: transform 0.2s ease;
+  }
+
+  .japandi-card:active {
+    transform: scale(0.98);
+  }
+
+  /* Primary CTA gradient */
+  .btn-primary {
+    @apply px-8 py-3 rounded-full bg-gradient-to-br from-[#8a4f36] to-[#d38b6e] text-white font-semibold shadow-lg hover:opacity-90 transition-opacity active:scale-95;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply px-6 py-3 rounded-full bg-surface-container-low text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors;
+  }
+
+  /* AI chip — glassmorphism */
+  .ai-chip {
+    @apply bg-secondary-fixed/50 backdrop-blur-md px-4 py-2 rounded-full text-on-secondary-fixed-variant text-sm font-medium flex items-center gap-2;
+    border: 1px solid rgba(83, 98, 84, 0.1);
+  }
+
+  /* Toast animations */
+  .toast-enter {
+    animation: toastIn 0.3s ease;
+  }
+
+  .toast-exit {
+    animation: toastOut 0.3s ease forwards;
+  }
+
+  /* Card slide-in */
+  .card-appear {
+    animation: slideIn 0.3s ease;
+  }
+}
+
+@layer utilities {
+  .font-headline {
+    font-family: 'Noto Serif', serif;
+  }
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(40px); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes expandIn {
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 800px; }
+}
+
+.modal-appear {
+  animation: slideUp 0.25s ease;
+}
+
+.expand-appear {
+  animation: expandIn 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(138, 79, 54, 0.2);
+  border-top-color: #8a4f36;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}

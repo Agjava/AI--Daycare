@@ -1,0 +1,16 @@
+{
+  "name": "Daycare Review Console",
+  "short_name": "Review",
+  "description": "AI-powered event review for teachers and directors",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fef8f5",
+  "theme_color": "#8a4f36",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
