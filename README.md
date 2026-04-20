@@ -1,4 +1,4 @@
-# Daycare AI Platform
+# Daycare AI 
 
 An AI-native childcare operations platform that replaces manual admin work with a voice-first pipeline. Teachers send voice memos via WhatsApp, the system structures them into logged events, admins perform the final review, and parents receive daily narrative reports. 
 
