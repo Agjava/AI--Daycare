@@ -37,29 +37,37 @@ Privacy First: COPPA compliant by design. Parent and admin access is scoped stri
 
 Human Approval: NEVER auto-send any event to parents without explicit human approval (teacher OR director).
 
-Local Development Setup
-Backend Environment:
+## Local Development Setup
 
-Bash
-python -m venv venv
-source venv/bin/activate
-pip install -r backend/requirements.txt
-Database Migrations:
+1. **Backend Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   pip install -r backend/requirements.txt
+   ```
 
-Bash
-alembic upgrade head
-Run FastAPI Server:
+2. **Database Migrations**:
+   ```bash
+   alembic upgrade head
+   ```
 
-Bash
-cd backend
-uvicorn main:app --reload
-Run Frontend Clients:
+3. **Run FastAPI Server**:
+   ```bash
+   cd backend
+   uvicorn main:app --reload
+   ```
 
-Bash
-# Admin & Teacher Console
-cd frontend/console
-npm install && npm run dev
+4. **Run Frontend Clients**:
+   ```bash
+   # Admin & Teacher Console
+   cd frontend/console
+   npm install && npm run dev
+   
+   # Parent Portal
+   cd frontend/parent
+   npm install && npm run dev
+   ```
 
-# Parent Portal
-cd frontend/parent
-npm install && npm run dev
+## Documentation
+
+Full product requirements and structural overviews are detailed in `docs/PRD.md` and `docs/legal_PRD.md`.
