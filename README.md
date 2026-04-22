@@ -11,15 +11,32 @@ Voice Intake: Teachers send voice memos via a WhatsApp Business bot.
 
 AI Extraction: The backend processes the audio using Whisper and AssemblyAI, then uses GPT-4o to extract strictly-typed JSON that matches our database schemas.
 
-## Three-Tier Review:
+### System Architecture & Pipeline
 
-High-confidence events are surfaced for a single-tap teacher approval.
+The system is a standalone platform with full stack ownership (no dependency on legacy tools). 
 
-Low-confidence, billing, or incident events (needs_review: true) automatically flag for Director review.
+1. **Ingestion Layer (WhatsApp Business API via Twilio)**
+   - Teachers interact exclusively via a WhatsApp Bot. They send voice memos (`.ogg`/`.mp4` up to 90s) and photo batches.
+   - Natural language context (e.g., "Jason just ate all his mac and cheese") serves as the raw input.
 
-No data reaches parents without a human in the loop.
+2. **AI Extraction & Structuring Layer (FastAPI Backend)**
+   - **Speech-to-Text (STT):** OpenAI Whisper (V1) is used for rapid transcription. (Future iterations plan to use AssemblyAI for better proper noun resolution).
+   - **Entity Extraction (LLM):** GPT-4o processes the transcript at `temperature=0` to ensure deterministic outputs. It extracts data strictly matching predefined Pydantic schemas (JSON structure).
+   - **Strict Validation:** The extracted JSON maps to strictly-typed entities (e.g., `MEAL`, `NAP`, `DIAPER`, `BILLING_LATE_PICKUP`). Parsing failures or ambiguous events default to `needs_review: true`.
 
-Parent Narratives: Real-time event updates are published to a live feed, and at the end of the day, parents receive a cohesive AI-generated summary of their child's day via a magic-link web portal.
+3. **Three-Tier Human-in-the-Loop (HITL) Review System**
+   - **Teacher Review:** High-confidence parsed events are sent back for a single-tap approval.
+   - **Director Review:** Low-confidence, incident-related, or billing-related events are automatically flagged for the Director Console.
+   - **Parent View:** Parents *only* see data after explicit human approval.
+
+4. **Presentation & Narrative Generation**
+   - At the end of the day, an automated pipeline groups all approved events per child.
+   - GPT-4o synthesizes these discrete events into a warm, personalized 120-250 word narrative paragraph.
+   - Parents access these reports via a Next.js-based web portal using magic links (no app install required).
+
+5. **Billing & Monetization Module**
+   - Voice memos containing billing intents (e.g., "Marcus was picked up 45 mins late") trigger a specific billing schema extraction.
+   - Admins approve the extraction, generating a PDF invoice processed via Stripe Connect.
 
 ## Tech Stack
 Backend: Python 3.11+, FastAPI, PostgreSQL
