@@ -35,7 +35,7 @@ The system is a standalone platform with full stack ownership (no dependency on 
    - Voice memos containing billing intents (e.g., "Marcus was picked up 45 mins late") trigger a specific billing schema extraction.
    - Admins approve the extraction, generating a PDF invoice processed via Stripe Connect.
 
-### Tech Stack
+## Tech Stack
 - **Backend:** Python 3.11, FastAPI, Uvicorn, Pydantic (Strict Data Validation).
 - **Database:** PostgreSQL (Multi-tenant scoped by `center_id`), SQLAlchemy + Alembic (Migrations).
 - **Frontend (Admin/Teacher):** React 19 (PWA, Vite, TailwindCSS) for real-time review queues.
@@ -43,7 +43,7 @@ The system is a standalone platform with full stack ownership (no dependency on 
 - **AI/ML:** OpenAI API (Whisper + GPT-4o).
 - **Integrations:** Twilio (WhatsApp API), Stripe Connect (Payments).
 
-### Core Engineering Guardrails
+## Core Engineering Guardrails
 - **Zero Hallucination Tolerance:** Strict schema adherence using `temperature=0`. Any deviation fails validation and is sent to the human review queue.
 - **Data Isolation:** All transactional queries are scoped by `center_id` at the DB level ensuring multi-tenant data privacy.
 - **Compliance:** Built with COPPA compliance in mind (media EXIF stripping, secure buckets, strict authorization models).
