@@ -1,17 +1,14 @@
-### Overview
+## Overview
 The Daycare AI Platform is an AI-native childcare operations system designed to replace manual administrative workflows (like tapping through apps or hiring virtual assistants) with a voice-first, high-accuracy pipeline. The platform allows daycare teachers to log daily events using voice memos and photos via WhatsApp. This unstructured data is processed, structured, validated, and pushed through a multi-tier review system before generating cohesive, AI-driven daily narrative reports for parents.
 
-### The Problem It Solves
+## The Problem It Solves
 Independent daycare directors ($300K–$750K ARR) rely on consumer-grade tools (like Brightwheel) which require teachers to manually log events on tablets (disrupting the classroom). Alternatively, they hire offshore VAs to review photos and create logs, which is expensive, slow, and prone to context loss. 
 
 This platform acts as an automated, highly-accurate operations layer. It eliminates the manual data entry bottleneck, guarantees structured data via LLM extraction, and uses a human-in-the-loop (HITL) model to prevent AI hallucinations from ever reaching parents.
 
-## How It Works
-Voice Intake: Teachers send voice memos via a WhatsApp Business bot.
 
-AI Extraction: The backend processes the audio using Whisper and AssemblyAI, then uses GPT-4o to extract strictly-typed JSON that matches our database schemas.
 
-### System Architecture & Pipeline
+## System Architecture & Pipeline
 
 The system is a standalone platform with full stack ownership (no dependency on legacy tools). 
 
