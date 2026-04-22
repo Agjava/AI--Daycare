@@ -38,25 +38,18 @@ The system is a standalone platform with full stack ownership (no dependency on 
    - Voice memos containing billing intents (e.g., "Marcus was picked up 45 mins late") trigger a specific billing schema extraction.
    - Admins approve the extraction, generating a PDF invoice processed via Stripe Connect.
 
-## Tech Stack
-Backend: Python 3.11+, FastAPI, PostgreSQL
+### Tech Stack
+- **Backend:** Python 3.11, FastAPI, Uvicorn, Pydantic (Strict Data Validation).
+- **Database:** PostgreSQL (Multi-tenant scoped by `center_id`), SQLAlchemy + Alembic (Migrations).
+- **Frontend (Admin/Teacher):** React 19 (PWA, Vite, TailwindCSS) for real-time review queues.
+- **Frontend (Parent Portal):** Next.js for SSR, magic-link auth, and SEO/performance.
+- **AI/ML:** OpenAI API (Whisper + GPT-4o).
+- **Integrations:** Twilio (WhatsApp API), Stripe Connect (Payments).
 
-Frontend: React PWA (Admin/Teacher Console), Next.js/Vercel (Parent Portal)
-
-AI/ML Pipelines: OpenAI Whisper API (V1), AssemblyAI Universal-2 (V1.5), GPT-4o (structured data extraction)
-
-Integrations: Twilio (WhatsApp API), Stripe Connect (Billing module)
-
-Infrastructure: Designed for Railway / Fly.io deployments
-
-## Core Architectural Guardrails
-Strict Validation: All LLM extraction calls run at temperature=0 and are validated against rigorous Pydantic models before database insertion. Parsing failures or ambiguous events automatically default to needs_review: true.
-
-Multi-tenant Isolation: Every table and transactional query is strictly scoped by center_id at the database level.
-
-Privacy First: COPPA compliant by design. Parent and admin access is scoped strictly via short-lived magic links and OTPs (no passwords). Facial recognition is strictly prohibited to avoid biometric compliance triggers.
-
-Human Approval: NEVER auto-send any event to parents without explicit human approval (teacher OR director).
+### Core Engineering Guardrails
+- **Zero Hallucination Tolerance:** Strict schema adherence using `temperature=0`. Any deviation fails validation and is sent to the human review queue.
+- **Data Isolation:** All transactional queries are scoped by `center_id` at the DB level ensuring multi-tenant data privacy.
+- **Compliance:** Built with COPPA compliance in mind (media EXIF stripping, secure buckets, strict authorization models).
 
 ## Local Development Setup
 
